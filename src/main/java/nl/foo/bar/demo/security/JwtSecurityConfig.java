@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.boot.security.autoconfigure.web.servlet.PathRequest.toH2Console;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -43,7 +44,15 @@ public class JwtSecurityConfig {
   ) throws Exception {
     return http.cors(withDefaults())
       .csrf((csrf) -> csrf.disable())
-      .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/", "/authenticate")
+      .authorizeHttpRequests((authorize) -> authorize.requestMatchers(
+          "/",
+          "/authenticate",
+          "/v3/api-docs/**",
+          "/api-docs*/**",
+          "/swagger-ui/**"
+        )
+        .permitAll()
+        .requestMatchers(toH2Console())
         .permitAll()
         .anyRequest()
         .fullyAuthenticated())

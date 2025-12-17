@@ -30,11 +30,13 @@ public class ActorService {
   }
 
   /**
-   * Checks if an actor with the given id exists. If so, all non-ID values in the database are replaced with the provided values.
+   * Checks if an actor with the given id exists. If so, all non-ID values in the database are
+   * replaced with the provided values.
    * When no actor exists a new actor is inserted in the database.
    *
    * @param actorEntityValues the actor values to create or replace in the database.
-   * @return An Optional containing the existing ActorEntity if it was replaced, or an empty Optional if a new actor was created.
+   * @return An Optional containing the existing ActorEntity if it was replaced, or an empty
+   *   Optional if a new actor was created.
    */
   public Optional<ActorEntity> createOrReplaceActor(ActorEntity actorEntityValues) {
     Optional<ActorEntity> existingActorEntity = this.getActorById(actorEntityValues.getId());
